@@ -18,10 +18,16 @@ class TestParser {
      * @var \DOMXPath
      */
     private $xpath;
+
     /**
      * @var string
      */
     private $url;
+
+    /**
+     * @var Client
+     */
+    private $guzzle;
 
     public function __construct() {
         $this->guzzle = new Client();
@@ -31,9 +37,13 @@ class TestParser {
         '<а>' => '//a/@href',
         '<img>' => '//img/@src',
         '<script>' => '//script/@src',
-        '<link>' => '//href/@href',
+        '<link>' => '//link/@href',
     ];
 
+    /**
+     * @param string $url
+     * @throws GuzzleException
+     */
     public function parse(string $url) {
         $this->loadDocumentData($url);
 
